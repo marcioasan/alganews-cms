@@ -79,6 +79,57 @@ export function Default(){
         Cell: () => <Icon path={mdiOpenInNew} size={'14px'} color={'#09f'} />
       },
       {
+        Header: () => <div style={{ textAlign: 'left' }}>Artigo</div>,
+        accessor: 'title',
+        width: 320,
+        Cell: (props) => <div style={{ textAlign: 'left', display: 'flex', gap: 8, alignItems: 'center' }}>
+          <img width={24} height={24} src={props.row.original.author.avatar} alt={props.row.original.author.name}/>
+          {props.value}
+        </div>
+      },
+      {
+        Header: () => <div style={{ textAlign: 'right' }}>Views</div>,
+        accessor: 'views',
+        Cell: (props) => <div style={{ textAlign: 'right', fontWeight: 700, fontFamily: '"Roboto mono", monospace' }}>{props.value.toLocaleString('pt-br')}</div>
+      },
+      {
+        Header: () => <div style={{ textAlign: 'left' }}>Conversões</div>,
+        accessor: 'conversions',
+        Cell: (props) => <div style={{ display: 'flex', gap: 8, fontWeight: 700, fontFamily: '"Roboto mono", monospace' }}>
+          <span>{props.value.thousands}k</span>
+          <span style={{ color: '#09f' }}>{props.value.percentage}%</span>
+        </div>
+      },
+      {
+        id: Math.random().toString(),
+        Header: () => <div style={{ textAlign: 'right' }}>Views</div>,
+        Cell: () => <div style={{ textAlign: 'right' }}>
+          todo: actions
+        </div>
+      },
+    ],
+    []
+  )
+
+  const instance = useTable<Post>({ data, columns })
+
+  return <Table<Post> instance={ instance }/>
+}
+
+export function WithoutData () {
+  const data = useMemo<Post[]>(
+    () => [],
+    []
+  )
+
+  const columns = useMemo<Column<Post>[]>(
+    () => [
+      {
+        Header: '',
+        accessor: 'id', // accessor is the "key" in the data
+        Cell: () => <Icon path={mdiOpenInNew} size={'14px'} color={'#09f'} />
+      },
+      {
         Header: 'Artigo',
         accessor: 'title',
         width: 320,
@@ -110,52 +161,7 @@ export function Default(){
     []
   )
 
-  const instance = useTable<Post>({ data, columns })
+  const insntace = useTable<Post>({ data, columns })
 
-  return <Table<Post> instance={ instance }/>
-}
-
-export function NoData(){
-  const data = useMemo<Post[]>(
-    () => [],
-    []
-  )
-
-  const columns = useMemo<Column<Post>[]>(
-    () => [
-      {
-        Header: '',
-        accessor: 'id', // accessor is the "key" in the data
-        Cell: () => <Icon path={ mdiOpenInNew } size={'14px'} color={'#09f'}/>
-      },
-      {
-        Header: 'Artigo',
-        accessor: 'title',
-        width: 320,
-        Cell: (props) => <div style={{ textAlign: 'left' }}>
-          <img src={props.row.original.author.avatar} alt={props.row.original.author.name} />
-          { props.value }
-        </div>//4.24. Recuperando dados além do accessor - 8'
-        
-      },
-      {
-        Header: 'Views',
-        accessor: 'views',
-        Cell: (props) => <div style={{ textAlign: 'right' }}>{ props.value }</div>
-      },
-      {
-        Header: 'Conversões',
-        accessor: 'conversions',
-        Cell: (props) => <div style={{ textAlign: 'right' }}>{ props.value }
-          <span>{props.value.thousands}k</span>
-          <span>{props.value.percentage}%</span>
-        </div>
-      },
-    ],
-    []
-  )
-
-  const instance = useTable<Post>({ data, columns })
-
-  return <Table<Post> instance={ instance }/>
+  return <Table<Post> instance={insntace} />
 }
