@@ -85,7 +85,8 @@ export function Default(){
         Cell: (props) => <div style={{ textAlign: 'left', display: 'flex', gap: 8, alignItems: 'center' }}>
           <img width={24} height={24} src={props.row.original.author.avatar} alt={props.row.original.author.name}/>
           {props.value}
-        </div>
+        </div>//4.24. Recuperando dados além do accessor -> +/- 7'35" - Ao renderizar a célula, passa as props
+              //que são as propriedades que a célula tem
       },
       {
         Header: () => <div style={{ textAlign: 'right' }}>Views</div>,
@@ -102,7 +103,7 @@ export function Default(){
       },
       {
         id: Math.random().toString(),
-        Header: () => <div style={{ textAlign: 'right' }}>Views</div>,
+        Header: () => <div style={{ textAlign: 'right' }}>Ações</div>,
         Cell: () => <div style={{ textAlign: 'right' }}>
           todo: actions
         </div>
