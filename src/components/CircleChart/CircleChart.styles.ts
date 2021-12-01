@@ -36,7 +36,7 @@ export const Percentage = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #274060;
+  color: ${p => p.color};
   font-weight: 900;
   font-size: 1.2em;
 `
