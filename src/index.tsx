@@ -2,11 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
+import Home from './views/Home.view';
+import Contact from './views/Contact.view';
+import NotFound404 from './views/NotFound404.view';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Switch>
+        <Route path={'/home'}>
+          <Home />
+        </Route>
+        <Route path={'/contato'}>
+          <Contact />
+        </Route>
+        <Route>
+          <NotFound404 />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
