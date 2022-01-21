@@ -1,4 +1,4 @@
-import usePageTitle from "../hooks/usePageTitle"
+import usePageTitle from "../../core/hooks/usePageTitle"
 
 export default function Home() {
   usePageTitle('Home') //5.14. Alterando o título da página conforme as rotas

@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import usePageTitle from "../hooks/usePageTitle"
+import usePageTitle from "../../core/hooks/usePageTitle"
 
 export default function UserView() {
   usePageTitle('Usuário') //5.14. Alterando o título da página conforme as rotas

@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react';
 
-import Table from '../components/Table2/Table2';
+import Table from '../app/components/Table2/Table2';
 
 export default {
   title: 'Example/Table2',
