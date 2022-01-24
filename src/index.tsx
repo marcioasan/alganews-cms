@@ -9,10 +9,10 @@ import NotFound404 from './app/views/NotFound404.view';
 import UserView from './app/views/User.view';
 import CalcView from './app/views/Calc.view';
 import NavBar from './app/components/NavBar';
+import GlobalStyles from './core/globalStyles'
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>      
       <BrowserRouter>
       <NavBar />
         <Switch>
@@ -29,7 +29,7 @@ ReactDOM.render(
            */}
         </Switch>
       </BrowserRouter>
-    </div>
+      <GlobalStyles />
   </React.StrictMode>,
   document.getElementById('root')
 );
