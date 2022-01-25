@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 
 export default function NavBar() {
 
-  return <nav>
+  return <>
     <ul>
       <li><Link to="/">Home</Link></li>
       <li><Link to="/contato">Contato</Link></li>
       <li><Link to="/usuario/1">Usuário</Link></li>
       <li><Link to="/calc/4/1">Soma</Link></li>
     </ul>
-  </nav>
+  </>
 }
 
 //OBS: Todo esse código abaixo é substituído pelo componente Link
