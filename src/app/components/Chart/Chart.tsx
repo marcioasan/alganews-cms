@@ -1,5 +1,4 @@
 import { transparentize } from 'polished';
-import { title } from 'process';
 import { Line } from 'react-chartjs-2';
 import styled from 'styled-components';
 import NoData from '../NoData/NoData';

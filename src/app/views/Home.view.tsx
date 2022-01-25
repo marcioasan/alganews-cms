@@ -1,13 +1,19 @@
 import usePageTitle from "../../core/hooks/usePageTitle"
 import PostList from "../features/PostsList"
-import UserMetrics from "../features/UserMetrics"
+import UserEarnings from "../features/UserEarnings"
+import UserPerformance from "../features/UserPerformance"
+import UserTopTags from "../features/UserTopTags"
 import DefaultLayout from "../layouts/Default"
 
 export default function Home() {
   usePageTitle('Home') //5.14. Alterando o título da página conforme as rotas
 
   return <DefaultLayout>
-      <UserMetrics />
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: '32px'}}>
+        <UserTopTags />
+        <UserEarnings />
+      </div>
+      <UserPerformance />
       <PostList />
   </DefaultLayout>
 }
