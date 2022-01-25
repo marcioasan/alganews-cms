@@ -5,7 +5,7 @@ export const Wrapper = styled.label`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 56px;
+  height: 56px;  
 
   span.Label {
     font-size: 14px;
@@ -14,6 +14,7 @@ export const Wrapper = styled.label`
   } 
 
   input {
+    background-color: transparent;
     height: 28px;
     font-size: 18px;
     font-weight: 500;
