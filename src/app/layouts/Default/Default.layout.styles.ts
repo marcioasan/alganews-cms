@@ -21,7 +21,11 @@ export const Main = styled.main`
   grid-template-columns: 214px 680px 214px;
   gap: 16px;
 `
-export const Navigation = styled.nav``
+export const Navigation = styled.nav`
+  display: flex;
+  padding-right: 32px;
+  justify-content: flex-end;
+`
 
 export const Aside = styled.aside``
 

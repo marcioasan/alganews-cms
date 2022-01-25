@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import usePageTitle from "../../core/hooks/usePageTitle"
+import DefaultLayout from "../layouts/Default/Default.layout"
 
 export default function UserView() {
   usePageTitle('Usuário') //5.14. Alterando o título da página conforme as rotas
@@ -10,7 +11,7 @@ export default function UserView() {
     console.log(params)
   }, [])
 
-  return <div>
+  return <DefaultLayout>
     <h1>Usuário - { params.userId }</h1>
-  </div>
+  </DefaultLayout>
 }

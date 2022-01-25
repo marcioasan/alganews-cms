@@ -1,5 +1,7 @@
+import DefaultLayout from "../layouts/Default/Default.layout"
+
 export default function NotFound404() {
-  return <div>
+  return <DefaultLayout>
     <h1>Não encontrado - 404</h1>
-  </div>
+  </DefaultLayout>
 }

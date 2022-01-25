@@ -1,16 +1,37 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
 export default function NavBar() {
 
   return <>
-    <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/contato">Contato</Link></li>
-      <li><Link to="/usuario/1">Usuário</Link></li>
-      <li><Link to="/calc/4/1">Soma</Link></li>
-    </ul>
+    <List>
+      <Item><NavLink exact to="/">Home</NavLink></Item>
+      <Item><NavLink exact to="/contato">Contato</NavLink></Item>
+      <Item><NavLink exact to="/usuario/1">Usuário</NavLink></Item>
+      <Item><NavLink exact to="/calc/4/1">Soma</NavLink></Item>
+    </List>
   </>
 }
+
+const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+`
+const Item = styled.li`
+   text-transform: lowercase;
+   font-size: 18px;
+
+   a {
+     text-decoration: none;
+     color: #274060;
+
+     &.active {
+       color: #09f
+     }
+   }
+`
 
 //OBS: Todo esse código abaixo é substituído pelo componente Link
 // import { MouseEvent } from "react";

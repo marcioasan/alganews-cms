@@ -1,0 +1,2 @@
+6.7. Criando as primeiras Features - 6'30"
+pasta criada para conter componentes que possuem regra de negócio
