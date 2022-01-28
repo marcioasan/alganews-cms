@@ -1,19 +1,16 @@
 import * as FD from "./FieldDescriptor.styles"
 
 export interface FieldDescriptorProps {
-  label: string
+  field: string
   value: React.ReactNode
-  
 }
 
-export default function FieldDescriptor({...props}: FieldDescriptorProps) {
+export default function FieldDescriptor({field, value}: FieldDescriptorProps) {
 
   return <FD.Wrapper >
     
-    <span className="Label">{ props.label }</span>
-    <div>
-      <span className="Valor">{ props.value }</span>
-    </div>
+    <FD.Field>{field}:</FD.Field>
+    <FD.Value>{value}</FD.Value>
 
   </FD.Wrapper>
 }

@@ -1,19 +1,18 @@
 import styled from "styled-components"
 
 export const Wrapper = styled.div`
-  
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 4px;
   color: #274060;
+`
 
-  span.Label {
-    font-size: 12px;
-    font-weight: 700;
-  }
+export const Field = styled.span`
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: lowercase;
+`
 
-  span.Valor {
-    font-size: 14px;
-    font-weight: 400;
-  }
+export const Value = styled.span`
+  font-size: 14px;
 `
