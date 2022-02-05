@@ -10,6 +10,7 @@ import GlobalStyles from './core/globalStyles'
 import EditorsListView from './app/views/EditorsList.view';
 import PostCreateView from './app/views/PostCreate.view';
 import EditorProfileView from './app/views/EditorProfile.view';
+import http from './core/http';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -34,26 +35,14 @@ ReactDOM.render(
 
 async function getDataFromApi() {
   try {
-    const response = await fetch('http://localhost:8080/posts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title: 'Olá, mundo',
-        body: 'Lorem Ipsum dolor sit amet'
-      })
+    const response = await http.post('/posts', {
+      title: 'Olá',
+      body: 'Lorem Ipsum'
     })
-    //console.log('RESPONSE:', response)
-    if(response.status >= 400){
-      throw new Error(await response.json())
-    }
-    const posts = await response.json()
-    console.log('Sucesso')
-    console.log(posts)
+    const post = response.data
+    console.log(post)
   } catch (error: unknown) {
-    console.log('Houve erro')
-    console.log(error)
+    console.log('Houve um erro', error)
   }
 }
 
