@@ -41,8 +41,8 @@ async function getDataFromApi() {
     })
     const post = response.data
     console.log(post)
-  } catch (error: unknown) {
-    console.log('Houve um erro', error)
+  } catch (error) {
+    console.log('Houve um erro', error.message)
   }
 }
 
