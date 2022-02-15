@@ -15,6 +15,7 @@ export default function PostForm() {
   const [tags, setTags]  = useState<Tag[]>([])
   const [body, setBody] = useState('')
   const [title, setTitle] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
 
 async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
@@ -23,7 +24,7 @@ async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     body,
     title,
     tags: tags.map(tag => tag.text),
-    imageUrl: ''
+    imageUrl, //8.22. Implementando o cadastro de posts - 6'
   }
 
   const insertedPost = await PostService.insertNewPost( newPost )
@@ -41,7 +42,11 @@ async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
       onChange={ e => setTitle(e.currentTarget.value) }
       placeholder="e.g. Como fiquei rico aprendendo React"
     />
-    <ImageUpload label="Thumbnail do post"/>
+    <ImageUpload 
+      //onImageUpload={( imageUrl ) => setImageUrl(imageUrl)} ou passar só a referência do método
+      onImageUpload={setImageUrl}
+      label="Thumbnail do post"
+      />
     { body }
     <MarkdownEditor onChange={setBody}/>
     <TagInput 
