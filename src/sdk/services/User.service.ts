@@ -14,6 +14,12 @@ class UserService extends Service {
       .then(this.getData)
   }
   
+  //8.27. Ganhos do usuário - 2'30"
+  static getDetailedUser(userId: number){
+    return this.Http
+      .get<User.Datailed>(`/users/${userId}`)
+      .then(this.getData)
+  }
 }
 
 export default UserService
