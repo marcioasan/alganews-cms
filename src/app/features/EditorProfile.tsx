@@ -42,8 +42,9 @@ function EditorProfile (props: EditorProfileProps) {
         <Biography>{editor.bio}</Biography>
         <Skills>
           {
-            editor.skills?.map(skill => {
+            editor.skills?.map((skill, i) => {
               return <ProgressBar
+                key={i}
                 progress={skill.percentage}
                 title={skill.name}
                 theme={'primary'}

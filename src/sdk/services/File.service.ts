@@ -2,7 +2,7 @@
 
 import Service from "../Service";
 import { File } from  '../@types'
-import { uuid } from "uuidv4";
+import { v4 as uuid } from "uuid";
 
 class FileService extends Service {
   private static getSignedUrl(fileInfo: File.UploadRequestInput) {

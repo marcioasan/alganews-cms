@@ -13,12 +13,13 @@ export default function UserTopTags() {
     MetricService
       .getTop3Tags()
       .then(setTopTags)
-  })
+  }, [])
 
   return <UserTopTagsWrapper>
     {
       topTags.map((tag, i) => {
-        return <CircleChart 
+        return <CircleChart
+          key={i} 
           progress={tag.percentage}
           caption={tag.tagName}
           theme={i === 0 ? 'primary' : 'default'}
