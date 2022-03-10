@@ -9,12 +9,19 @@ export default function UserTopTags() {
   //8.26. Top 3 Tags
   const [topTags, setTopTags] = useState<Metric.EditorTagRatio>([])
 
+  //8.32. Aplicando error boundaries 6'17"
+  const [error, setError] = useState<Error>()
+
   useEffect(() => {
     MetricService
       .getTop3Tags()
       .then(setTopTags)
+      .catch(error => setError(new Error(error.message)))
   }, [])
 
+  if(error)
+  throw error
+  
   return <UserTopTagsWrapper>
     {
       topTags.map((tag, i) => {

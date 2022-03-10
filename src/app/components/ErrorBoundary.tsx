@@ -1,7 +1,9 @@
 import { Component } from "react";
 import ErrorDisplay from "./ErrorDisplay";
 
-interface Props {}
+interface Props {
+  component?: string;
+}
 interface State {
   hasError: boolean;
   error?: {    
@@ -25,7 +27,8 @@ class ErrorBoundary extends Component<Props, State> {
  
   public render() {
     if(this.state.hasError) {
-      return <ErrorDisplay 
+      return <ErrorDisplay
+      title={`Erro ao renderizar ${this.props.component || 'componente'}` } 
         message={this.state.error?.message}
       />
     }

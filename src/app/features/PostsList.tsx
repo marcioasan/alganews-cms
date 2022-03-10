@@ -12,6 +12,9 @@ export default function PostList() {
   //8.30. Buscando dados paginados da API - 3'
   const [posts, setPosts] = useState<Post.Paginated>();
 
+    //8.32. Aplicando error boundaries 6'17"
+    const [error, setError] = useState<Error>()
+
   useEffect(() => {
     PostService
       .getAllPosts({
@@ -21,7 +24,11 @@ export default function PostList() {
         sort: ['createdAt', 'desc']
       })
       .then(setPosts)
+      .catch(error => setError(new Error(error.message)))
   }, [])
+
+  if(error)
+    throw error
 
   const columns = useMemo<Column<Post.Summary>[]>(
     () => [

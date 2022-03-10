@@ -9,11 +9,18 @@ export default function UserEarnings() {
   //8.27. Ganhos do usuário - 4'
    const [user, setUser] = useState<User.Datailed>()
 
+  //8.32. Aplicando error boundaries 6'17"
+  const [error, setError] = useState<Error>()
+
    useEffect(() => {
     UserService
       .getDetailedUser(7)
       .then(setUser)
+      .catch(error => setError(new Error(error.message)))
    }, [])
+
+   if(error)
+   throw error
 
    //8.27. Ganhos do usuário - 5'30"
    if(!user)
