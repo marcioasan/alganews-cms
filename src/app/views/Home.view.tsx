@@ -18,9 +18,9 @@ export default function Home() {
         <UserEarnings />
       </ErrorBoundary>  
       </div>
-      <ErrorBoundary component={'performance'}>
+      
         <UserPerformance />
-      </ErrorBoundary>
+      
       <ErrorBoundary component={'lista de posts'}>
         <PostList />
       </ErrorBoundary>
