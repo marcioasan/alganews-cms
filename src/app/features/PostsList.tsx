@@ -3,9 +3,10 @@ import Icon from "@mdi/react"
 import { format } from "date-fns"
 import { useEffect, useMemo, useState } from "react"
 import Skeleton from "react-loading-skeleton"
-import { Column, useTable } from "react-table"
+import { Column, usePagination, useTable } from "react-table"
 import { Post } from "../../sdk/@types"
 import PostService from "../../sdk/services/Post.service";
+import Loading from "../components/Loading"
 import Table from "../components/Table/Table"
 
 export default function PostList() {
@@ -15,18 +16,25 @@ export default function PostList() {
 
     //8.32. Aplicando error boundaries 6'17"
     const [error, setError] = useState<Error>()
+    const [page, setPage] = useState(0)
+    const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
+
     PostService
       .getAllPosts({
-        page: 0,
+        page,
         size: 7,
         showAll: true,
         sort: ['createdAt', 'desc']
       })
       .then(setPosts)
       .catch(error => setError(new Error(error.message)))
-  }, [])
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [page])
 
   if(error)
     throw error
@@ -93,10 +101,17 @@ export default function PostList() {
   )
 
   //8.30. Buscando dados paginados da API - 5'50"
-  const instance = useTable<Post.Summary>({ 
+  const instance = useTable<Post.Summary>(
+    { 
     data: posts?.content || [], 
-    columns 
-  })
+    columns,
+    //8.41. Aplicando paginação no react-table
+    manualPagination: true,
+    initialState: { pageIndex: 0 },
+    pageCount: posts?.totalPages
+    },
+    usePagination
+  )
 
   if(!posts)
     return <div>
@@ -110,8 +125,12 @@ export default function PostList() {
       <Skeleton height={40}/>
     </div>
 
-  return <Table 
-    instance={ instance }
-  />
+  return <>
+    <Loading show={loading}/>
+    <Table 
+      instance={ instance }
+      onPaginate={setPage}
+    />
+  </>
 
 }
