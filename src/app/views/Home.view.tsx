@@ -9,7 +9,7 @@ import DefaultLayout from "../layouts/Default"
 export default function Home() {
   usePageTitle('Home') //5.14. Alterando o título da página conforme as rotas
 
-  return <DefaultLayout>
+  return <DefaultLayout>      
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: '32px'}}>
       <ErrorBoundary component={'top tags'}>
         <UserTopTags />

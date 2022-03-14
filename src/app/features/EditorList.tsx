@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 import styled from "styled-components";
 import { User } from "../../sdk/@types";
 import UserService from "../../sdk/services/User.service";
@@ -15,8 +17,14 @@ export default function EditorsList() {
       .then(setEditors)
   }, [])
 
-  return <EditorsListWrapper>
+  if(!editors.length)
+    return <EditorsListWrapper>
+      <Skeleton height={82}/>
+      <Skeleton height={82}/>
+      <Skeleton height={82}/>
+    </EditorsListWrapper>
 
+  return <EditorsListWrapper>
     {
       editors.map(editor => {
         return <Profile

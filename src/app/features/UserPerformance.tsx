@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Skeleton from "react-loading-skeleton"
 import withBoundary from "../../core/hoc/withBoundary"
 import transformEditorMonthlyEarningsIntoChartJs from "../../core/utils/transformEditorMonthlyEarningsIntoChartJs"
 import MetricService from "../../sdk/services/Metric.service"
@@ -28,7 +29,9 @@ function UserPerformance() {
 
   //8.28. Transformando dados para o ChartJs - 13'50"
   if(!editorEarnings)
-    return null
+    return <div>
+    <Skeleton height={227}/>
+  </div>
 
   return <Chart 
     title="Média de performance nos últimos 12 meses"
@@ -36,4 +39,4 @@ function UserPerformance() {
   />
 }
 
-export default withBoundary(UserPerformance, 'LALALALA')
+export default withBoundary(UserPerformance, 'Performance do usuário')
