@@ -4,10 +4,12 @@ import { format } from "date-fns"
 import { useEffect, useMemo, useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import { Column, usePagination, useTable } from "react-table"
+import modal from "../../core/utils/modal";
 import { Post } from "../../sdk/@types"
 import PostService from "../../sdk/services/Post.service";
 import Loading from "../components/Loading"
 import Table from "../components/Table/Table"
+import PostPreview from "./PostPreview"
 
 export default function PostList() {
 
@@ -58,7 +60,20 @@ export default function PostList() {
             alt={props.row.original.editor.name}
             title={props.row.original.editor.name}
             />
-          {props.value}
+            
+            {/* 8.44. Desafio - Criar modal de Preview de Post */}
+            <a
+              href={`/posts/${props.row.original.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                modal({
+                  children: <PostPreview postId={props.row.original.id} />,
+                });
+              }}
+            >
+              {props.value}
+            </a>
+            
         </div>//4.24. Recuperando dados além do accessor -> +/- 7'35" - Ao renderizar a célula, passa as props
               //que são as propriedades que a célula tem
       },
