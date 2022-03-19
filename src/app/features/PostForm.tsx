@@ -11,8 +11,11 @@ import TagInput from "../components/TagInput"
 import WordPriceCounter from "../components/WordPriceCounter"
 import PostService from "../../sdk/services/Post.service"
 import Loading from "../components/Loading"
+import { useHistory } from "react-router-dom"
 
 export default function PostForm() {
+  const history = useHistory()
+
   const [tags, setTags]  = useState<Tag[]>([])
   const [body, setBody] = useState('')
   const [title, setTitle] = useState('')
@@ -39,6 +42,7 @@ async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
       title: 'Post salvo com sucesso',
       description: 'Você acabou de criar o post com o id ' + insertedPost.id
     })
+    history.push('/') //8.53. Melhorando a experiência do cadastro de post - 3'30"
   } finally {
     setPublishing(false)
   }
@@ -70,7 +74,12 @@ async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
         pricePerWord={ 0.25 } 
         wordsCount={ countWordsInMarkdown(body) }
       />
-      <Button variant="primary" label="Salvar post" type="submit"/>
+      <Button 
+        variant="primary" 
+        label="Salvar post" 
+        type="submit"
+        disabled={!title || !imageUrl || !body || !tags.length}
+      />
     </PostFormSubmitWrapper>
   </PostFormWrapper>
 }
