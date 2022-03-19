@@ -9,6 +9,7 @@ import Loading from "../components/Loading";
 import confirm from "../../core/utils/confirm";
 import info from "../../core/utils/info";
 import modal from "../../core/utils/modal";
+import { useHistory } from "react-router-dom";
 
 //8.44. Desafio - Criar modal de Preview de Post
 interface PostPreviewProps {
@@ -16,6 +17,9 @@ interface PostPreviewProps {
 }
 
 function PostPreview (props: PostPreviewProps) {
+  
+  //8.54. O problema do BrowserRouter - 2'40"
+  const history = useHistory()
   
   //8.52. Publicando um post - 3'40", 7'30"
   async function publishPost() {
@@ -73,6 +77,7 @@ function PostPreview (props: PostPreviewProps) {
             variant={'primary'}
             label={'Editar'}
             disabled={post.published}
+            onClick={() => window.location.pathname = `/posts/editar/${props.postId}`}
           />          
         </PostPreviewActions>
       </PostPreviewHeading>
