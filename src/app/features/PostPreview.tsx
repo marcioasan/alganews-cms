@@ -2,6 +2,10 @@ import withBoundary from "../../core/hoc/withBoundary";
 import styled from 'styled-components'
 import MarkdownEditor from '../components/MarkdownEditor/MarkdownEditor';
 import Button from "../components/Button/Button";
+import { useEffect, useState } from "react";
+import { Post } from "../../sdk/@types";
+import PostService from "../../sdk/services/Post.service";
+import Loading from "../components/Loading";
 
 //8.44. Desafio - Criar modal de Preview de Post
 interface PostPreviewProps {
@@ -9,12 +13,30 @@ interface PostPreviewProps {
 }
 
 function PostPreview (props: PostPreviewProps) {
+  
+  //8.47. Recuperando post da API
+  const [post, setPost] = useState<Post.Datailed>()
+  const [loading, setLoading] = useState(false)
+  
+  useEffect(() => {
+    setLoading(true)
+    PostService
+      .getExistingPost(props.postId)
+      .then(setPost)
+      .finally(() => setLoading(false))
+  }, [props.postId])
+
+  if(loading)
+    return <Loading show/>
+
+  if(!post)
+    return null
 
   //8.46. Desafio - Layout do Post
   return <PostPreviewWrapper>
       <PostPreviewHeading>
         <PostPreviewTitle>
-          {'Como fiquei rico aprendendo React'}
+          {post.title}
         </PostPreviewTitle>
         <PostPreviewActions>
           <Button
@@ -28,12 +50,12 @@ function PostPreview (props: PostPreviewProps) {
         </PostPreviewActions>
       </PostPreviewHeading>
       <PostPreviewImage
-        src={'https://images.unsplash.com/photo-1499343628900-545067aef5a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'}
+        src={post.imageUrls.medium}
       />
       <PostPreviewContent>
         <MarkdownEditor
           readOnly
-          value={'ola mundo\n- esta é\n- uma lista'} 
+          value={post.body} 
         />
       </PostPreviewContent>
   </PostPreviewWrapper>

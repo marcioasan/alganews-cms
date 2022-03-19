@@ -16,7 +16,7 @@ class PostService extends Service {
 
   static getExistingPost(id: number) {    
     return this.Http
-      .get<Post.Paginated>(`/posts/${id}`)
+      .get<Post.Datailed>(`/posts/${id}`)
       .then(this.getData) 
   }
 
