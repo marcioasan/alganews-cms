@@ -64,5 +64,6 @@ background-color: ${p => THEME[p.variant].bg};
 
   pointer-events: none;
   border-color: transparent;
+  opacity: 0.5;
 }
 `
