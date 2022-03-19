@@ -8,6 +8,7 @@ import modal from "../../core/utils/modal";
 import { Post } from "../../sdk/@types"
 import PostService from "../../sdk/services/Post.service";
 import Loading from "../components/Loading"
+import PostTitleAnchor from "../components/PostTitleAnchor"
 import Table from "../components/Table/Table"
 import PostPreview from "./PostPreview"
 
@@ -52,7 +53,13 @@ export default function PostList() {
         Header: () => <div style={{ textAlign: 'left' }}>Título</div>,
         accessor: 'title',
         width: 320,
-        Cell: (props) => <div style={{ textAlign: 'left', display: 'flex', gap: 8, alignItems: 'center' }}>
+        Cell: (props) => <div style={{ 
+          textAlign: 'left', 
+          display: 'flex', 
+          gap: 8, 
+          alignItems: 'center',
+          maxWidth: 270, 
+        }}>
           <img 
             width={24} 
             height={24} 
@@ -61,8 +68,9 @@ export default function PostList() {
             title={props.row.original.editor.name}
             />
             
-            {/* 8.44. Desafio - Criar modal de Preview de Post */}
-            <a
+            {/* 8.44. Desafio - Criar modal de Preview de Post, 8.49. Estilizando o título do post */}
+            <PostTitleAnchor
+              title={props.value}
               href={`/posts/${props.row.original.id}`}
               onClick={(e) => {
                 e.preventDefault();
@@ -72,7 +80,7 @@ export default function PostList() {
               }}
             >
               {props.value}
-            </a>
+            </PostTitleAnchor>
             
         </div>//4.24. Recuperando dados além do accessor -> +/- 7'35" - Ao renderizar a célula, passa as props
               //que são as propriedades que a célula tem
