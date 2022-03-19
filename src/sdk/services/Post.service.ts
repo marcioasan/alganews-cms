@@ -26,6 +26,13 @@ class PostService extends Service {
       .post<Post.Datailed>('/posts', post)
       .then(this.getData)
   }
+
+  //8.52. Publicando um post - 2'
+  static publishExistingPost(postId: number) {
+    return this.Http
+      .put<{}>(`/posts/${postId}/publishing`)
+      .then(this.getData)
+  }
 }
 
 export default PostService

@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { Post } from "../../sdk/@types";
 import PostService from "../../sdk/services/Post.service";
 import Loading from "../components/Loading";
+import confirm from "../../core/utils/confirm";
+import info from "../../core/utils/info";
+import modal from "../../core/utils/modal";
 
 //8.44. Desafio - Criar modal de Preview de Post
 interface PostPreviewProps {
@@ -14,6 +17,21 @@ interface PostPreviewProps {
 
 function PostPreview (props: PostPreviewProps) {
   
+  //8.52. Publicando um post - 3'40", 7'30"
+  async function publishPost() {
+    await PostService.publishExistingPost(props.postId)
+    info({
+      title: 'Post publicado',
+      description: 'Você publicou o post com sucesso'
+    })
+  }
+
+  function reopenModal() {
+    modal({
+      children: <PostPreview postId={props.postId}/>
+    })
+  }
+
   //8.47. Recuperando post da API
   const [post, setPost] = useState<Post.Datailed>()
   const [loading, setLoading] = useState(false)
@@ -43,6 +61,13 @@ function PostPreview (props: PostPreviewProps) {
             variant={'danger'}
             label={'Publicar'}
             disabled={post.published}
+            onClick={() => {
+              confirm({
+                title: 'Publicar o post?',
+                onConfirm: publishPost,
+                onCancel: reopenModal,
+              })
+            }}
           />
           <Button
             variant={'primary'}
