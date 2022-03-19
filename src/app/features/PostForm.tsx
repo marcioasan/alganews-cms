@@ -57,7 +57,7 @@ async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
       onImageUpload={setImageUrl}
       label="Thumbnail do post"
       />
-    { body }
+    
     <MarkdownEditor onChange={setBody}/>
     <TagInput 
       tags={ tags }
