@@ -33,6 +33,14 @@ class PostService extends Service {
       .put<{}>(`/posts/${postId}/publishing`)
       .then(this.getData)
   }
+
+  //8.55. Edição do post - 3'
+  static updateExistingPost(postId: number, post: Post.Input) {
+    return this.Http
+      .put<Post.Datailed>(`/posts/${postId}`, post)
+      .then(this.getData)
+  }
+
 }
 
 export default PostService
