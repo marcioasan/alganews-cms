@@ -1,7 +1,7 @@
 import { mdiDelete, mdiUpload } from '@mdi/js'
 import Icon from '@mdi/react'
+import { FileService } from 'marcioasan-sdk'
 import { ChangeEvent, useEffect, useState } from 'react'
-import FileService from '../../../sdk/services/File.service'
 import Button from '../Button/Button'
 import Loading from '../Loading'
 import *  as IU from './ImageUpload.styles'
@@ -28,7 +28,7 @@ function ImageUpload (props: ImageUploadProps) {
           setFilePreview(String(e.target?.result))
           //8.21. Abstraindo a lógica do upload - 4'
           //8.21. Abstraindo a lógica do upload - 12'
-          const imageUrl = await FileService.upload(file)
+          const imageUrl = await FileService.upload(file) //9.8. Implementando os primeiros serviços - 11'
           props.onImageUpload(imageUrl)
         } finally {
           setPushing(false)
