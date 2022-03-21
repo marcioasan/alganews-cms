@@ -1,4 +1,4 @@
-import log from "marcioasan-sdk";
+import log, { feature } from "marcioasan-sdk";
 import { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import info from "../core/utils/info";
@@ -13,6 +13,7 @@ export default function App() {
 
   useEffect(() =>{
     log()
+    feature()
     window.onunhandledrejection = function(error: PromiseRejectionEvent){
       console.log(error)
       info({

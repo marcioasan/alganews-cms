@@ -15,7 +15,7 @@
     "axios": "^0.25.0",
     "chart.js": "2.9.4",
     "date-fns": "^2.28.0",
-    "marcioasan-sdk": "^1.0.1",
+    "marcioasan-sdk": "1.2.0",
     "markdown-it": "^12.3.2",
     "polished": "^4.1.3",
     "react": "^17.0.2",
