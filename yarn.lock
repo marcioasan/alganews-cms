@@ -10750,6 +10750,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+marcioasan-sdk@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/marcioasan-sdk/-/marcioasan-sdk-1.0.1.tgz#a82c3727701ce2e3a46204cf026756ba1331e0e2"
+  integrity sha512-nTDR32yoK7P5lIGasKc8nSyTlfTIYKwD3A8q0JDfFk7FpOlSN5l6GGqWsHUjonIPf9umeXFPQqIax+NMUQmabg==
+
 markdown-escapes@^1.0.0:
   version "1.0.4"
   resolved "https://registry.npmjs.org/markdown-escapes/-/markdown-escapes-1.0.4.tgz"

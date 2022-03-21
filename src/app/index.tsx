@@ -1,3 +1,4 @@
+import log from "marcioasan-sdk";
 import { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import info from "../core/utils/info";
@@ -11,6 +12,7 @@ import PostEditView from "./views/PostEdit.view";
 export default function App() {
 
   useEffect(() =>{
+    log()
     window.onunhandledrejection = function(error: PromiseRejectionEvent){
       console.log(error)
       info({
