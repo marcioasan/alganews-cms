@@ -9,9 +9,9 @@ import Input from "../components/Input/Input"
 import MarkdownEditor from "../components/MarkdownEditor/MarkdownEditor"
 import TagInput from "../components/TagInput"
 import WordPriceCounter from "../components/WordPriceCounter"
-import PostService from "../../sdk/services/Post.service"
 import Loading from "../components/Loading"
 import { useHistory } from "react-router-dom"
+import { PostService } from "marcioasan-sdk"
 
 //8.55. Edição do post - 4'20"
 interface PostFormProps {

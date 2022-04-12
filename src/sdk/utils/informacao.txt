@@ -1,2 +1,0 @@
-Pasta sdk/utils criada na aula 
-8.17. A Developer Experience do SDK

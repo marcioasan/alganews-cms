@@ -1,8 +1,7 @@
+import { Metric, MetricService } from "marcioasan-sdk";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
-import { Metric } from "../../sdk/@types";
-import MetricService from "../../sdk/services/Metric.service";
 import CircleChart from "../components/CircleChart";
 
 export default function UserTopTags() {

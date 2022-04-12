@@ -10762,10 +10762,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-marcioasan-sdk@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/marcioasan-sdk/-/marcioasan-sdk-3.0.1.tgz#d477a60df04db37339c48f1aeb1190472a9ec781"
-  integrity sha512-SHr6TCEqz+/IFOlYwMwYH2BNTNPBUVkC6JgHUpeVBHvD5iNImMC3y9oDCl2r1Ct3JWsd4sc1AKuhNZSlw1XWWw==
+marcioasan-sdk@2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/marcioasan-sdk/-/marcioasan-sdk-2.7.0.tgz#e2da01d9f3b71eae6ee33e26d550834089c581a3"
+  integrity sha512-AaGNjcZyhftXLjeDam9EUa9IdjhTD09s6GjdYsIAOFAViRWzqsA8egUXpTdMVxopIeCbB4Uu9Gz5CPs9LEDn8g==
   dependencies:
     axios "^0.26.1"
     date-fns "^2.28.0"

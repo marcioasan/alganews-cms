@@ -1,12 +1,11 @@
 import { mdiOpenInNew } from "@mdi/js"
 import Icon from "@mdi/react"
 import { format } from "date-fns"
+import { Post, PostService } from "marcioasan-sdk"
 import { useEffect, useMemo, useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import { Column, usePagination, useTable } from "react-table"
 import modal from "../../core/utils/modal";
-import { Post } from "../../sdk/@types"
-import PostService from "../../sdk/services/Post.service";
 import Loading from "../components/Loading"
 import PostTitleAnchor from "../components/PostTitleAnchor"
 import Table from "../components/Table/Table"

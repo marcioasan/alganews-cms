@@ -3,12 +3,11 @@ import styled from 'styled-components'
 import MarkdownEditor from '../components/MarkdownEditor/MarkdownEditor';
 import Button from "../components/Button/Button";
 import { useEffect, useState } from "react";
-import { Post } from "../../sdk/@types";
-import PostService from "../../sdk/services/Post.service";
 import Loading from "../components/Loading";
 import confirm from "../../core/utils/confirm";
 import info from "../../core/utils/info";
 import modal from "../../core/utils/modal";
+import { Post, PostService } from "marcioasan-sdk";
 
 //8.44. Desafio - Criar modal de Preview de Post
 interface PostPreviewProps {
