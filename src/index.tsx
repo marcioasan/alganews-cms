@@ -6,9 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './core/globalStyles'
 import App from './app'
 
+//10.5. Configurando a store raiz
+import { Provider } from 'react-redux'
+import store from './core/store'
+
 ReactDOM.render(
   <React.StrictMode>
+    
+    {/* //10.5. Configurando a store raiz */}
+    <Provider store={store}> 
       <App />
+    </Provider>
+    
       <GlobalStyles />
   </React.StrictMode>,
   document.getElementById('root')

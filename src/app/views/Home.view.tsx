@@ -1,4 +1,9 @@
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import usePageTitle from "../../core/hooks/usePageTitle"
+import selectPaginatedPosts from "../../core/selectors/selectPaginatedPosts"
+import { RootState } from "../../core/store"
+import { addPost, fetchPosts } from "../../core/store/Post.slice"
 import ErrorBoundary from "../components/ErrorBoundary"
 import PostList from "../features/PostsList"
 import UserEarnings from "../features/UserEarnings"
@@ -6,10 +11,70 @@ import UserPerformance from "../features/UserPerformance"
 import UserTopTags from "../features/UserTopTags"
 import DefaultLayout from "../layouts/Default"
 
+const fakePost = {
+  id: 42,
+  slug: "como-fazer-x-coisas-com-react-js",
+  title: "Como fazer X coisas com React.js",
+  imageUrls: {
+    default:
+      "https://storage.googleapis.com/alganews-files/posts/avatar-joao.jpeg",
+    small:
+      "https://storage.googleapis.com/alganews-files/posts/avatar-joao-small.jpeg",
+    medium:
+      "https://storage.googleapis.com/alganews-files/posts/avatar-joao-medium.jpeg",
+    large:
+      "https://storage.googleapis.com/alganews-files/posts/avatar-joao-large.jpeg",
+  },
+  editor: {
+    id: 29,
+    name: "Daniel Bonifacio",
+    avatarUrls: {
+      default:
+        "https://storage.googleapis.com/alganews-files/posts/avatar-joao.jpeg",
+      small:
+        "https://storage.googleapis.com/alganews-files/posts/avatar-joao-small.jpeg",
+      medium:
+        "https://storage.googleapis.com/alganews-files/posts/avatar-joao-medium.jpeg",
+      large:
+        "https://storage.googleapis.com/alganews-files/posts/avatar-joao-large.jpeg",
+    },
+    createdAt: "2017-03-04T00:12:45Z",
+  },
+  createdAt: "2020-12-04T00:12:45-03:00",
+  updatedAt: "2020-12-05T00:12:45-03:00",
+  published: true,
+  tags: ["JavaScript"],
+  canBePublished: true,
+  canBeUnpublished: true,
+  canBeDeleted: true,
+  canBeEdited: true,
+};
+
 export default function Home() {
   usePageTitle('Home') //5.14. Alterando o título da página conforme as rotas
+  
+  //10.10. Disparando uma ação
+  const dispatch = useDispatch()
+  
+  //10.11. Acessando a store dentro de um componente
+  const paginatedPosts = useSelector(selectPaginatedPosts);
 
-  return <DefaultLayout>      
+  //10.10. Disparando uma ação
+  useEffect(() => {
+    dispatch(addPost(fakePost))
+  }, [dispatch])
+
+
+  return <DefaultLayout>
+    <button onClick={() => {
+      dispatch(fetchPosts({ page: 0 }))
+    }}>
+      disparar ação
+      </button>
+      {paginatedPosts?.map((post) => (
+        <li>{post.title}</li>
+      ))}
+
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: '32px'}}>
       <ErrorBoundary component={'top tags'}>
         <UserTopTags />
