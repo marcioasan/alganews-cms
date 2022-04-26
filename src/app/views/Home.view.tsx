@@ -20,6 +20,10 @@ export default function Home() {
   //10.17. Abstraindo o Redux com Hooks - 8'10"
   const { paginatedPosts, loading, fetchPosts } = usePosts()
 
+  useEffect(() => {
+    fetchPosts({ page: 1 })
+  }, [fetchPosts])
+
   //10.10. Disparando uma ação
   // const dispatch = useDispatch() //removido na aula 10.17. Abstraindo o Redux com Hooks - 8'20"
   
