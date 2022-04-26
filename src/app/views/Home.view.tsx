@@ -37,7 +37,7 @@ export default function Home() {
 
 
   return <DefaultLayout>
-    <button onClick={() => {
+{/*     <button onClick={() => {
       fetchPosts({ page: 1 })
       // dispatch(increment()) //removido na aula 10.17. Abstraindo o Redux com Hooks - 8'20"
     }}>
@@ -48,7 +48,7 @@ export default function Home() {
       <hr />
       {paginatedPosts?.map((post) => (
         <li>{post.title}</li>
-      ))}
+      ))} */}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: '32px'}}>
       <ErrorBoundary component={'top tags'}>

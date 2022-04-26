@@ -3,20 +3,24 @@ import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 import styled from "styled-components";
+import useEditors from "../../core/hooks/useEditors";
 
 import Profile from "../components/Profile";
 
 export default function EditorsList() {
 
-  const[editors, setEditors] = useState<User.EditorSummary[]>([])
+  //10.19. Migrando uma feature para o Redux - 11'20"
+  const { editorsList, loading, fetchAllEditors } = useEditors()
+
+  //10.19. Migrando uma feature para o Redux - removido nessa aula 11'40"
+ //const[editors, setEditors] = useState<User.EditorSummary[]>([])
 
   useEffect(() => {
-    UserService
-      .getAllEditors()
-      .then(setEditors)
-  }, [])
+    fetchAllEditors()
+    //UserService.getAllEditors().then(setEditors) //10.19. Migrando uma feature para o Redux - removido nessa aula 11'50"
+  }, [fetchAllEditors])
 
-  if(!editors.length)
+  if(!editorsList.length)
     return <EditorsListWrapper>
       <Skeleton height={82}/>
       <Skeleton height={82}/>
@@ -25,7 +29,7 @@ export default function EditorsList() {
 
   return <EditorsListWrapper>
     {
-      editors.map(editor => {
+      editorsList.map(editor => {
         return <Profile
           key={editor.id} //8.31. Resolvendo pequenos erros de depreciação - 2'15"
           editorId={ editor.id }
@@ -34,6 +38,9 @@ export default function EditorsList() {
           avatarUrl={ editor.avatarUrls.small }
         />
       })
+    }
+    {
+      loading ? 'buscando mais informações' : null
     }
   </EditorsListWrapper>
 }
