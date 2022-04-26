@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import usePageTitle from "../../core/hooks/usePageTitle"
+import usePosts from "../../core/hooks/UsePosts"
 import selectPaginatedPosts from "../../core/selectors/selectPaginatedPosts"
 import selectPostsCounter from "../../core/selectors/selectPostsCounter"
 import { RootState } from "../../core/store"
@@ -16,11 +17,14 @@ import DefaultLayout from "../layouts/Default"
 export default function Home() {
   usePageTitle('Home') //5.14. Alterando o título da página conforme as rotas
   
+  //10.17. Abstraindo o Redux com Hooks - 8'10"
+  const { paginatedPosts, loading, fetchPosts } = usePosts()
+
   //10.10. Disparando uma ação
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch() //removido na aula 10.17. Abstraindo o Redux com Hooks - 8'20"
   
   //10.11. Acessando a store dentro de um componente, 10.16. Reduzindo boilerplate com createReducer
-  const counter = useSelector(selectPostsCounter);
+  // const counter = useSelector(selectPostsCounter); //removido na aula 10.17. Abstraindo o Redux com Hooks - 8'20"
 
   //10.10. Disparando uma ação
   // useEffect(() => {
@@ -30,11 +34,17 @@ export default function Home() {
 
   return <DefaultLayout>
     <button onClick={() => {
-      dispatch(increment())
+      fetchPosts({ page: 1 })
+      // dispatch(increment()) //removido na aula 10.17. Abstraindo o Redux com Hooks - 8'20"
     }}>
       disparar ação
       </button>
-      {counter}
+      {loading ? 'carregando' : 'finalizado'}
+      
+      <hr />
+      {paginatedPosts?.map((post) => (
+        <li>{post.title}</li>
+      ))}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: '32px'}}>
       <ErrorBoundary component={'top tags'}>
