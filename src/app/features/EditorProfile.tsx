@@ -3,6 +3,7 @@ import { transparentize } from "polished";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import useSingleEditor from "../../core/hooks/useSingleEditor";
 // import { User } from "../../sdk/@types";
 // import UserService from "../../sdk/services/User.service";
 // import getEditorDescription from "../../sdk/utils/getEditorDescription";
@@ -17,13 +18,13 @@ interface EditorProfileProps {
 function EditorProfile (props: EditorProfileProps) {
   /* throw new Error("Houve um erro ao renderizar o componente EditorProfile") */
   const params = useParams<{ id: string }>()
-  const [editor, setEditor] = useState<User.EditorDetailed>()
+  const { editor, fetchEditor } = useSingleEditor() //10.20. Nem sempre vale a pena usar o Redux
+  //const [editor, setEditor] = useState<User.EditorDetailed>()
 
   useEffect(() => {
-    UserService
-      .getExistingEditor(Number(params.id))
-      .then(setEditor)
-  }, [params.id])
+    fetchEditor(Number(params.id))
+    //UserService.getExistingEditor(Number(params.id)).then(setEditor)
+  }, [fetchEditor, params.id])
 
   //8.25. Perfil de editor - 9'30"
   if(!editor)
