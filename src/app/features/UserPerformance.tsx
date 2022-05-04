@@ -1,42 +1,29 @@
-import { MetricService } from "marcioasan-sdk"
-import { useEffect, useState } from "react"
-import Skeleton from "react-loading-skeleton"
-import withBoundary from "../../core/hoc/withBoundary"
-import transformEditorMonthlyEarningsIntoChartJs from "../../core/utils/transformEditorMonthlyEarningsIntoChartJs"
-import Chart, { ChartProps } from "../components/Chart/Chart"
+import { useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
+import withBoundary from "../../core/hoc/withBoundary";
+import usePerformance from "../../core/hooks/usePerformance";
+import Chart from "../components/Chart/Chart";
 
 function UserPerformance() {
-
-  //8.28. Transformando dados para o ChartJs - 5'
-  const [editorEarnings, setEditorEarnings] = useState<ChartProps['data']>()
-  
-  //8.32. Aplicando error boundaries 3'50"
-  const [error, setError] = useState<Error>()
+  const { fetchPerformance, performance } = usePerformance();
 
   useEffect(() => {
-    MetricService
-      .getEditorMonthlyEarnings()
-      .then(transformEditorMonthlyEarningsIntoChartJs)
-      .then(setEditorEarnings)
-      .catch(error => {
-        setError(new Error(error.message))
-      })
-  }, [])
+    fetchPerformance();
+  }, [fetchPerformance]);
 
-  //8.32. Aplicando error boundaries 4'30"
-  if(error)
-    throw error
+  if (!performance)
+    return (
+      <div>
+        <Skeleton height={227} />
+      </div>
+    );
 
-  //8.28. Transformando dados para o ChartJs - 13'50"
-  if(!editorEarnings)
-    return <div>
-    <Skeleton height={227}/>
-  </div>
-
-  return <Chart 
-    title="Média de performance nos últimos 12 meses"
-    data={ editorEarnings }
-  />
+  return (
+    <Chart
+      title="Média de performance nos últimos 12 meses"
+      data={performance}
+    />
+  );
 }
 
-export default withBoundary(UserPerformance, 'Performance do usuário')
+export default withBoundary(UserPerformance, "Batata");

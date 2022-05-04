@@ -4,8 +4,9 @@ import Confirm from '../../app/components/Confirm/Confirm';
 
 interface ConfirmProps {
   title: string
-  onConfirm?: () => any
-  onCancel?: () => any
+  //10.22. Desafio - Migrar features para os Hooks - 1'30"
+  onConfirm?: (...args: any[]) => void
+  onCancel?: (...args: any[]) => void
 }
 
 export default function confirm(props: ConfirmProps) {

@@ -1,94 +1,68 @@
+//10.22. Desafio - Migrar features para os Hooks
+import { useEffect } from "react";
+import styled from "styled-components";
 import withBoundary from "../../core/hoc/withBoundary";
-import styled from 'styled-components'
-import MarkdownEditor from '../components/MarkdownEditor/MarkdownEditor';
 import Button from "../components/Button/Button";
-import { useEffect, useState } from "react";
+import MarkdownEditor from "../components/MarkdownEditor/MarkdownEditor";
 import Loading from "../components/Loading";
 import confirm from "../../core/utils/confirm";
-import info from "../../core/utils/info";
 import modal from "../../core/utils/modal";
-import { Post, PostService } from "marcioasan-sdk";
+import useSinglePost from "../../core/hooks/useSinglePost";
 
-//8.44. Desafio - Criar modal de Preview de Post
 interface PostPreviewProps {
-  postId: number
+  postId: number;
 }
 
-function PostPreview (props: PostPreviewProps) {
-  
-  //8.54. O problema do BrowserRouter - 2'40"
-  //const history = useHistory()
-  
-  //8.52. Publicando um post - 3'40", 7'30"
-  async function publishPost() {
-    await PostService.publishExistingPost(props.postId)
-    info({
-      title: 'Post publicado',
-      description: 'Você publicou o post com sucesso'
-    })
-  }
+function PostPreview(props: PostPreviewProps) {
+  const { fetchPost, loading, post, publishPost } = useSinglePost();
 
   function reopenModal() {
     modal({
-      children: <PostPreview postId={props.postId}/>
-    })
+      children: <PostPreview postId={props.postId} />,
+    });
   }
 
-  //8.47. Recuperando post da API
-  const [post, setPost] = useState<Post.Datailed>()
-  const [loading, setLoading] = useState(false)
-  
   useEffect(() => {
-    setLoading(true)
-    PostService
-      .getExistingPost(props.postId)
-      .then(setPost)
-      .finally(() => setLoading(false))
-  }, [props.postId])
+    fetchPost(props.postId);
+  }, [fetchPost, props.postId]);
 
-  if(loading)
-    return <Loading show/>
+  if (loading) return <Loading show />;
 
-  if(!post)
-    return null
+  if (!post) return null;
 
-  //8.46. Desafio - Layout do Post
-  return <PostPreviewWrapper>
+  return (
+    <PostPreviewWrapper>
       <PostPreviewHeading>
-        <PostPreviewTitle>
-          {post.title}
-        </PostPreviewTitle>
+        <PostPreviewTitle>{post.title}</PostPreviewTitle>
         <PostPreviewActions>
           <Button
-            variant={'danger'}
-            label={'Publicar'}
+            variant={"danger"}
+            label={"Publicar"}
             disabled={post.published}
             onClick={() => {
               confirm({
-                title: 'Publicar o post?',
-                onConfirm: publishPost,
+                title: "Publicar o post?",
+                onConfirm: () => publishPost(props.postId),
                 onCancel: reopenModal,
-              })
+              });
             }}
           />
           <Button
-            variant={'primary'}
-            label={'Editar'}
+            variant={"primary"}
+            label={"Editar"}
             disabled={post.published}
-            onClick={() => window.location.pathname = `/posts/editar/${props.postId}`} //8.54. O problema do BrowserRouter - 2'40"
-          />          
+            onClick={() =>
+              (window.location.pathname = `/posts/editar/${props.postId}`)
+            }
+          />
         </PostPreviewActions>
       </PostPreviewHeading>
-      <PostPreviewImage
-        src={post.imageUrls.medium}
-      />
+      <PostPreviewImage src={post.imageUrls.medium} />
       <PostPreviewContent>
-        <MarkdownEditor
-          readOnly
-          value={post.body} 
-        />
+        <MarkdownEditor readOnly value={post.body} />
       </PostPreviewContent>
-  </PostPreviewWrapper>
+    </PostPreviewWrapper>
+  );
 }
 
 const PostPreviewWrapper = styled.div`
@@ -101,26 +75,30 @@ const PostPreviewWrapper = styled.div`
   flex-direction: column;
   max-height: 70vh;
   overflow-y: auto;
-  box-shadow: 0 6px 6px rgba(0,0,0,.05);
-`
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.05);
+`;
 
 const PostPreviewHeading = styled.div`
   display: flex;
   justify-content: space-between;
-`
+`;
+
 const PostPreviewTitle = styled.h2`
   font-size: 18px;
   font-weight: 600;
-`
+`;
+
 const PostPreviewActions = styled.div`
   display: flex;
   gap: 8px;
-`
+`;
+
 const PostPreviewImage = styled.img`
   height: 240px;
   width: 100%;
   object-fit: cover;
-`
-const PostPreviewContent = styled.div`
-`
-export default withBoundary(PostPreview)
+`;
+
+const PostPreviewContent = styled.div``;
+
+export default withBoundary(PostPreview);
